@@ -1,0 +1,87 @@
+import { SigmoidPlayground } from "@/components/demos/SigmoidPlayground";
+
+export const meta = {
+  title: "How to write a post",
+  date: "2026-11-12",
+  summary: "A reference post showing everything a post can contain: code, maths, tables, notes, figures and interactive demos.",
+  draft: true,
+};
+
+This post is a **draft**: it appears when you run the blog locally (`npm run dev`) but not on the published site. Keep it as a reference, or delete it once you've written your first real post.
+
+## Starting a post
+
+Create a file in `content/posts/`. The file name becomes the address, so `my-first-post.mdx` is published at `/posts/my-first-post`. Every post starts with its details:
+
+```js title="content/posts/my-first-post.mdx"
+export const meta = {
+  title: "My first post",
+  date: "2026-11-20",        // YYYY-MM-DD, used for ordering
+  summary: "One or two sentences shown on the home page and in link previews.",
+  draft: true,               // remove this line to publish
+};
+```
+
+After that it's ordinary Markdown: `## Heading`, `**bold**`, `*italic*`, `[a link](https://example.com)`, lists, and so on.
+
+## Code
+
+Fenced code blocks are highlighted, in light and dark mode. Add a title after the language:
+
+```python title="neuron.py"
+import numpy as np
+
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+def forward(x, w, b):
+    """A single neuron: weighted sum, then activation."""
+    return sigmoid(np.dot(w, x) + b)
+```
+
+Inline code like `np.dot(w, x)` gets a soft background.
+
+## Maths
+
+Write LaTeX between dollar signs for inline maths, like $\sigma(z) = \frac{1}{1 + e^{-z}}$, and between double dollar signs for a centred equation:
+
+$$
+\frac{\partial \mathcal{L}}{\partial w_{ij}^{(l)}} = \delta_j^{(l)} \, a_i^{(l-1)},
+\qquad
+\delta^{(l)} = \left( W^{(l+1)\top} \delta^{(l+1)} \right) \odot \sigma'\!\left(z^{(l)}\right)
+$$
+
+Equations are rendered when the site is built, so they load instantly and readers' browsers don't need any extra code.
+
+## Interactive demos
+
+Any React component can go inside a post. This one is imported at the top of the file. Move the sliders:
+
+<SigmoidPlayground />
+
+The weight $w$ controls how steep the curve is; the bias $b$ shifts it left or right. A negative weight flips it.
+
+## Notes, figures and tables
+
+<Note title="Note">
+  Use `<Note>` for an aside that would interrupt the main text, like a caveat, a definition or a tip.
+</Note>
+
+<Figure src="/images/example-wave.svg" alt="Two overlapping waveforms" caption="Figures take a caption. Put image files in public/images/." />
+
+| Activation | Range | Derivative |
+| --- | --- | --- |
+| Sigmoid | $(0, 1)$ | $\sigma(z)(1 - \sigma(z))$ |
+| tanh | $(-1, 1)$ | $1 - \tanh^2(z)$ |
+| ReLU | $[0, \infty)$ | $1$ if $z > 0$, else $0$ |
+
+> Quotes look like this: useful when you're critiquing a specific passage of a paper.
+
+Footnotes work too.[^1]
+
+## Publishing
+
+1. Remove `draft: true` from the post's details.
+2. Commit and push. Vercel rebuilds the site and the post goes live, with its own link-preview image.
+
+[^1]: Like this one. Handy for references and side remarks.
