@@ -14,8 +14,8 @@ const url =
 export const site = {
   name: "Sasha Sutton",
   title: "Sasha Sutton — Writing",
-  description: "Notes, tutorials and short research write-ups on machine learning, maths and sound.",
-  intro: "Notes, tutorials and short research write-ups — mostly machine learning and maths, sometimes sound.",
+  description: "Tutorials and short research write-ups on machine learning, maths and sound.",
+  intro: "Tutorials and short research write-ups — mostly machine learning and maths, sometimes sound.",
   url,
   links: {
     // Add the portfolio's address here and a "Portfolio" link appears in the header.

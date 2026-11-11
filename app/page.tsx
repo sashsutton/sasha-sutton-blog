@@ -9,7 +9,7 @@ export default async function Home() {
     <>
       <section className="pt-14 pb-12 sm:pt-20">
         <h1 className="font-serif text-6xl leading-[0.9] tracking-tight sm:text-7xl">
-          Writing<em className="text-accent">.</em>
+          Writing/<wbr />Blogging<em className="text-accent">.</em>
         </h1>
         <p className="mt-6 text-lg leading-relaxed text-pretty text-muted">{site.intro}</p>
       </section>
